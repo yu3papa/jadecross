@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>성능랩</title>
+</head>
+<body>
+<h1>성능저하 사례 관찰</h1>
+<pre>
+0. E2E
+     └ <a href="00_e2e/e2e.jsp">End To End</a> E2E Global 프로파일 샘플
+            * 위 링크가 실패하면 <a href="00_e2e/create.jsp">DB 테이블 생성</a> 클릭(약 10분 소요됨)
+1. SLEEP
+     └ <a href="01_sleep/was_sleep.jsp?sleepMiliSec=1000">WAS sleep</a> WAS에서 n초간 sleep하는 페이지
+     └ <a href="01_sleep/db_sleep.jsp?sleepSec=1">DB sleep</a> DB에서 n초간 sleep하는 페이지
+   
+2. JDBC
+     └ <a href="02_jdbc/resultset_not_close.jsp">ResultSet Not Close</a> SQL 실행 후 "JDBC ResultSet Not Close"하는 페이지
+     └ <a href="02_jdbc/statement_not_close.jsp">Statement Not Close</a> SQL 실행 후 "JDBC Statement Not Close"하는 페이지
+     └ <a href="02_jdbc/connection_not_close.jsp">Connection Not Close</a> SQL 실행 후 "JDBC Connection Not Close"하는 페이지
+     └ <a href="02_jdbc/fetch_time.jsp">Fetch Time</a> SQL 실행 후 Fetch시(rs.next())1초간 sleep 하는 페이지
+   
+3. OOM
+     └ <a href="03_oom/too_many_object_in_session.jsp">Too Many Object in Session</a> Session객체에 너무 많은 객체를 저장하여 Heap 영역에서 OOM이 발생하는 페이지
+     └ <a href="03_oom/too_many_jsp_load.jsp">Too Many JSP Load</a> Request마다 신규 jsp파일을 생성하고 호출하여, 새로은 Class가 항상 Load되어 Permanent 영역에서 OOM이 발생하는 페이지
+     └ <a href="PermgenOomDynamicClassLoadFromTemporaryClassLoader">PermgenOomDynamicClassLoadFromTemporaryClassLoader</a> ClassLoader가 런타임에 동적으로 Class를 생성하고 Load 한 후 ClassLoader 자신이 메모리 해제되는 샘플
+     └ <a href="PermgenOomDynamicClassLoadFromPermanentClassLoader">PermgenOomDynamicClassLoadFromPermanentClassLoader</a> ClassLoader가 런타임에 동적으로 Class를 생성하고 Load 한 후 ClassLoader가 영구히 메모리에 남아 있어 PermGen OOM을 발생하는 샘픔
+   
+4. Lock
+     └ <a href="04_lock/dblock_lock.jsp?t=1000">DB Update Lock</a> DB Update시 Tx구간을 n초로 설정하여, Lock이 발생하고 전체적으로 병목이 발생하는 페이지
+     └ <a href="04_lock/sync_method_call.jsp?sleepMiliSec=1000">Synchronized Method Lock</a> Synchronized Method의 수행시간을 n초로 설정하여, Thread 병목 현상을 발생하는 페이지
+         1. 10명의 가상유저로 perfbasic/04_lock/sync_method_call.jsp?sleepMiliSec=500 호출
+         2. 부하가 발생되는 상황에서 perfbasic/04_lock/sync_method_call.jsp?sleepMiliSec=5000 을 호출하여 5초간 Lock 유도
+      
+5. CPU Load
+     └ <a href="05_cpu/was_run_queue.jsp?count=1000">WAS Cpu Load</a> WAS에서 n번의 루프를 돌면서 실수연산을 반복적으로 수행하여 WAS CPU를 소비하는 페이지
+     └ <a href="05_cpu/db_run_queue.jsp?count=1000">DB Cpu Load</a> DB Function내에서 n번의 루프를 돌면서 실수연산을 반복적으로 수행하여 DB서버 CPU를 소비하는 페이지
+     
+6. Session Clustering 체크
+     └ <a href="06_session/session_check.jsp">Session Clustering 체크</a> Session Clustering된 WAS환경에서 세션복제가 정상적인지 체크하는 페이지
+
+7. Lage Profile
+     └ <a href="07_large_profile/general_profile.jsp">General Profile</a> 일반 사이즈의 트랜잭션 프로파일(SQL 1건 수행) - APM 수집서버의 성능 관찰용
+     └ <a href="07_large_profile/large_profile.jsp?count=30000">Large Profile</a> 전달받은 count만큼 SQL을 수행하고 SQL 1번 수행할때 마다 총 50개의 바인드 변수 이용 - APM에서 수집하는 양이 많아지는데 이때 APM 수집서버의 성능 관찰용
+</pre>
+
+
+</body>
+</html>

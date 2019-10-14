@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="js/netfunnel.js" charset="UTF-8"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<!-- Latest compiled and minified CSS -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>넷퍼넬 데모 - 보건정보원</title>
+<script type="text/javascript">
+	function printTime() {
+		var clock = document.getElementById("clock"); // 출력할 장소 선택
+		var now = new Date(); // 현재시간
+		var nowTime = "";
+
+		nowTime += now.getFullYear() + "-";
+		nowTime += (now.getMonth() + 1) + "-";
+		nowTime += now.getDate() + " ";
+		nowTime += now.getHours() + ":";
+		nowTime += now.getMinutes() + ":";
+		nowTime += now.getSeconds();
+
+		clock.innerHTML = nowTime; // 현재시간을 출력
+		setTimeout("printTime()", 1000); // setTimeout(“실행할함수”,시간) 시간은1초의 경우 1000
+	}
+
+	function bid() {
+		NetFunnel_Action({
+			action_id : "demo_action",
+			use_mobile_ui : true
+		}, document.bidform);
+	}
+</script>
+<style>
+	.container{ width:100%; margin:20px;}
+	.con01{ width:100%; min-width:600px;}
+	.con01 h2 { padding:20px 0 20px 30px; font-size:50px;}
+	.navbar-form {width:100%; padding:10px;}
+	.btnlo {display:block; text-align:center; padding: 20px;}
+	.table-striped { padding: 5px;}
+	.table-striped input {font-size:30px;padding:5px; height:60px;}
+	.form-control{font-size:30px;padding:5px; height:60px;}
+	.btn-primary{font-size:30px; padding:5px 20px 10px 20px; }
+</style>
+</head>
+<body>
+	<div class="container" >
+		<div class="row con01">
+			<img src="img/kcdc.png">
+			<h2>연구과제등록</h2>
+		</div>
+		<div class="row con01">
+			<form name="bidform" method="post" action="demo_action.jsp" class="navbar-form navbar-left" >
+				<div class="table-responsive" *ngIf="users">
+        			<table class="table table-striped" style="font-size:34px;">
+						<tbody>
+						<tr>
+							<th>연구분야</th>
+							<td>신종감염병 매개체 연구</td>
+						</tr>
+						<tr>
+							<th>연구개요</th>
+							<td>
+							메르스 바이러스 분리 배양 최적조건 연구<br/>
+							메르스 배양용 세포주, 약독화주 개발<br/>
+							메르스 세포주 유전적 변이 분석 연구</td>
+						</tr>
+						<tr>
+							<th>제출마감일시</th>
+							<td>2017. 7. 6(목) 오후 17:00</td>
+						</tr>
+						<tr>
+							<th>현재시간</th>
+							<td><span id="clock"></span></td>
+						</tr>
+						<tr>
+							<th>ID</th>
+							<td><input class="form-control" type="text" name="id" value="jader"/></td>
+						</tr>
+						<tr>
+							<th>연구기관</th>
+							<td><input class="form-control" type="text" name="company" value="jadecross" /></td>
+						</tr>
+						<tr>
+							<th>연구금액</th>
+							<td><input class="form-control" type="text" name="amount" value="1000" />만원</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="row btnlo">
+						<input type="hidden" name="wasLoopCount" value="1000" /> 
+						<input type="hidden" name="dbLoopCount" value="1000" /> 
+						<input type="submit" class="btn btn-lg btn-primary" onclick="bid(); return false;" value="연구과제등록">
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	printTime();
+</script>
