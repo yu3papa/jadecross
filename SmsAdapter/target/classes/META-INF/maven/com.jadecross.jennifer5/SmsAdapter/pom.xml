@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.jadecross.jennifer5</groupId>
+	<artifactId>SmsAdapter</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<dependencies>
+		<!-- TODO: 사용자가 필요한 라이브러리 추가하는 영역 (Add required dependencies here) -->
+
+		<!-- TODO: 제니퍼 플러그인을 구현하기 위한 필수 라이브러리 (Required library for implementing the Jennifer Plugin) -->
+		<dependency>
+			<groupId>com.aries</groupId>
+			<artifactId>extension</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>http://support.jennifersoft.com:8081/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+	</repositories>
+</project>
