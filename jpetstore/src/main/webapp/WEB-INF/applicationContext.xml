@@ -35,25 +35,19 @@
     </jdbc:embedded-database>
     -->
 
-
-	<!-- ##### Oracle 11gR2 JNDI DataSource 설정 ##### tomcat : java:comp/env/jdbc/jpetstore 
+	<!-- ##### Oracle 11gR2 JNDI DataSource 설정 ##### 
+		tomcat : java:comp/env/jdbc/jpetstore 
 		jboss : java:jboss/resources/jdbc/jpetstore 
-	<bean id="dataSource"
-		class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName"
-			value="java:comp/env/jdbc/jpetstore" />
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/jpetstore" />
 		<property name="resourceRef" value="true" />
 	</bean>
 	-->
 	
-
 	<!-- ##### Oracle 11gR2 DBCP DataSource 설정 ##### -->
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url"
-			value="jdbc:oracle:thin:@192.168.10.200:1521:orcl" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@jadecross.iptime.org:1521:orcl" />
 		<property name="username" value="jpetstore" />
 		<property name="password" value="jadecross" />
 		<property name="initialSize" value="0" />
@@ -62,8 +56,6 @@
 		<property name="minIdle" value="0" />
 		<property name="maxWait" value="-1" />
 	</bean>
-	
-
 
     <!-- transaction manager, use DataSourceTransactionManager" for JDBC local tx -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
