@@ -9,19 +9,17 @@
 # 모든 객체 -> id, type -> value
 # 파이썬 -> 일관성
 
-# 일반적인 튜플 사용
+# 두점사이의 거리 구하기 샘플
+from math import sqrt
 
+# 일반적인 튜플 사용
 pt1 = (1.0, 5.0)
 pt2 = (2.5, 1.5)
 
-from math import sqrt
-
 line_leng1 = sqrt((pt2[0] - pt1[0]) ** 2 + (pt2[1] - pt1[1]) ** 2)
-
 print('EX1-1 -', line_leng1)
 
 # 네임드 튜플 사용
-
 from collections import namedtuple
 
 # 네임드 튜플 선언
@@ -38,6 +36,10 @@ line_leng2 = sqrt((pt2.x - pt1.x) ** 2 + (pt2.y - pt1.y) ** 2)
 print('EX1-2 -', line_leng2)
 print('EX1-3 -', line_leng1 == line_leng2)
 
+print(id(Point))
+print(type(Point))
+print(dir(Point))
+
 
 # 네임드 튜플 선언 방법
 Point1 = namedtuple('Point', ['x', 'y'])
@@ -45,7 +47,6 @@ Point2 = namedtuple('Point', 'x, y')
 Point3 = namedtuple('Point', 'x y')
 Point4 = namedtuple('Point', 'x y x class', rename=True) # Default=False
 
-# 출력
 print('EX2-1 -', Point1, Point2, Point3, Point4)
 
 print()
@@ -61,7 +62,6 @@ p3 = Point3(45, y=20)
 p4 = Point4(10, 20, 30, 40)
 p5 = Point3(**temp_dict)
 
-# 출력
 print('EX2-2 -', p1, p2, p3, p4, p5)
 
 print()
@@ -70,6 +70,7 @@ print()
 # 사용
 print('EX3-1 -', p1[0] + p2[1]) # Index Error 주의
 print('EX3-2 -', p1.x + p2.y) # 클래스 변수 접근 방식
+
 
 # Unpacking
 x, y = p3
@@ -83,25 +84,20 @@ print()
 print()
 
 # 네임드 튜플 메소드
-
 temp = [52, 38] 
 
 # _make() : 새로운 객체 생성
 p4 = Point1._make(temp)
-
 print('EX4-1 -', p4)
 
 # _fields : 필드 네임 확인
-
 print('EX4-2 -', p1._fields, p2._fields, p3._fields)
 
 # _asdict() : OrderedDict 반환
-
 print('EX4-3 -', p1._asdict(), p4._asdict())
 
 
 # _replace() : 수정된 '새로운' 객체 반환
-
 print('EX4-4 -', p2._replace(y=100))
 
 print()
@@ -124,8 +120,8 @@ students = [Classes(rank, number) for rank in ranks for number in numbers]
 print('EX5-1 -', len(students))
 print('EX5-2 -', students)
 
-# 가독성 X
 
+# 가독성 X
 students2 = [Classes(rank, number) 
                     for rank in 'A B C D'.split() 
                         for number in [str(n) 

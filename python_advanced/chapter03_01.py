@@ -14,9 +14,12 @@ codes1 = []
 for s in chars:
     # 유니코드 리스트
     codes1.append(ord(s))
+print(codes1)
+
 
 # Comprehending Lists
 codes2 = [ord(s) for s in chars]
+print(codes2)
 
 # Comprehending Lists + Map, Filter
 # 속도 약간 우세
@@ -38,7 +41,6 @@ print()
 
 
 # Generator 생성 방법
-
 import array
 
 # Generator : 한 번에 한 개의 항목을 생성(메모리 유지X)
@@ -59,6 +61,7 @@ print('EX3-1 -', ('%s' % c + str(n) for c in ['A', 'B', 'C', 'D'] for n in range
 
 for s in ('%s' % c + str(n) for c in ['A', 'B', 'C', 'D'] for n in range(1,11)):
     print('EX3-2 -', s)
+
 
 
 print()
@@ -87,9 +90,7 @@ print('EX4-6 -', [id(i) for i in marks2])
 # Tuple Advanced
 
 # Unpacking
-
 # b, a = a, b
-
 print('EX5-1 -', divmod(100, 9))
 print('EX5-2 -', divmod(*(100, 9)))
 print('EX5-3 -', *(divmod(100, 9)))
@@ -107,19 +108,21 @@ print()
 print()
 
 # Mutable(가변) vs Immutable(불변)
-
 l = (10, 15, 20)
 m = [10, 15, 20]
 
 print('EX6-1 -', l, id(l))
 print('EX6-2 -', m, id(m))
 
+# x = x * 2 로 확장시 List, Tuple 새로은 객체로 대체
 l = l * 2
 m = m * 2
 
 print('EX6-3 -', l, id(l))
 print('EX6-4 -', m, id(m))
 
+# x *= 2 로 확장시 List는 새로은 객체로 대체
+# x *= 2 로 확장시 Tuple은 기존 객체를 갱신
 l *= 2
 m *= 2
 
@@ -140,18 +143,16 @@ print('EX7-2 -', sorted(f_list, reverse=True))
 print('EX7-3 -', sorted(f_list, key=len))
 print('EX7-4 -', sorted(f_list, key=lambda x: x[-1]))
 print('EX7-5 -', sorted(f_list, key=lambda x: x[-1], reverse=True))
-print()
-
 print('EX7-6 -', f_list)
 
 print()
+print()
 
 # sort : 정렬 후 객체 직접 변경
-
 # 반환 값 확인(None)
-print('EX7-7 -', f_list.sort(), f_list)
-print('EX7-8 -', f_list.sort(reverse=True), f_list)
-print('EX7-9 -', f_list.sort(key=len), f_list)
+print('EX7-07 -', f_list.sort(), f_list)
+print('EX7-08 -', f_list.sort(reverse=True), f_list)
+print('EX7-09 -', f_list.sort(key=len), f_list)
 print('EX7-10 -', f_list.sort(key=lambda x: x[-1]), f_list)
 print('EX7-11 -', f_list.sort(key=lambda x: x[-1], reverse=True), f_list)
 
