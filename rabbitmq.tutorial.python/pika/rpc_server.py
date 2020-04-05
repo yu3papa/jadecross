@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import pika
 
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost'))
+credentials = pika.PlainCredentials('rabbitmqadm', 'jadecross')
+parameters = pika.ConnectionParameters('jadecross.iptime.org', 5672, '/', credentials)
+# connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+connection = pika.BlockingConnection(parameters)
 
 channel = connection.channel()
 

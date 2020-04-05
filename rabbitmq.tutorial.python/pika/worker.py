@@ -2,8 +2,11 @@
 import pika
 import time
 
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost'))
+credentials = pika.PlainCredentials('rabbitmqadm', 'jadecross')
+parameters = pika.ConnectionParameters('jadecross.iptime.org', 5672, '/', credentials)
+# connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+connection = pika.BlockingConnection(parameters)
+
 channel = connection.channel()
 
 channel.queue_declare(queue='task_queue', durable=True)
